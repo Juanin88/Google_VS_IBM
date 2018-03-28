@@ -26,7 +26,7 @@ public class SpeechToTextGoogle {
 	/**
 	 * Demonstrates using the Speech API to transcribe an audio file.
 	 */
-	public String speechToTextFromFile(String fileName, String languaje) throws Exception {
+	public String speechToTextFromFile(String fileName, String languaje, boolean debug) throws Exception {
 
 		Boolean error = false;
 		String errorMessage = "[ERROR] - ";
@@ -65,7 +65,7 @@ public class SpeechToTextGoogle {
 			RecognitionAudio audio = RecognitionAudio.newBuilder().setContent(audioBytes).build();
 
 			// for debug.
-			if (true) {
+			if (debug) {
 				return "texto demo google";
 			}
 

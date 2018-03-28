@@ -30,12 +30,10 @@ public class QuickstartSample {
 	      if (listOfFiles[i].isFile()) {
 	        System.out.println("File " + listOfFiles[i].getName());
 	        
-			System.out.println( speechToTextGoogle.speechToTextFromFile("resources/" + listOfFiles[i].getName(), "es-MX") );
-
-			System.out.println( speechToTextIBM.speechToTextFromFile("resources/" + listOfFiles[i].getName(), "es-MX") );
-			
-			String GoogleTxt = speechToTextGoogle.speechToTextFromFile("resources/" + listOfFiles[i].getName(), "es-MX") ;
-			String IBMTxt = speechToTextIBM.speechToTextFromFile("resources/" + listOfFiles[i].getName(), "es-MX");
+	        boolean debug = true;
+	        
+			String GoogleTxt =  speechToTextGoogle.speechToTextFromFile("resources/" + listOfFiles[i].getName(), "es-MX" , debug)  ;
+			String IBMTxt = speechToTextIBM.speechToTextFromFile("resources/" + listOfFiles[i].getName(), "es-MX" , debug) ;
 		
 			try (Writer writer = new BufferedWriter(new OutputStreamWriter(
 		              new FileOutputStream("processedFiles/" + listOfFiles[i].getName() + ".google.txt"), "utf-8"))) {
@@ -47,8 +45,6 @@ public class QuickstartSample {
 						writer.write(IBMTxt);
 			}
 			
-			File file = new File("resources/" + listOfFiles[i].getName());
-
 			Path sourcePath      = Paths.get("resources/" + listOfFiles[i].getName());
 			Path destinationPath = Paths.get("processedFiles/" + listOfFiles[i].getName());
 

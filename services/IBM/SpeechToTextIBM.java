@@ -25,7 +25,7 @@ public class SpeechToTextIBM {
 		credentials = new CredentialsLoader();
 	}
 	
-	public String speechToTextFromFile(String fileName, String languaje) throws LineUnavailableException, UnsupportedAudioFileException, IOException {
+	public String speechToTextFromFile(String fileName, String languaje , boolean debug ) throws LineUnavailableException, UnsupportedAudioFileException, IOException {
 
 		String language = "es-ES_NarrowbandModel";
 
@@ -41,7 +41,7 @@ public class SpeechToTextIBM {
 		  .contentType(HttpMediaType.AUDIO_WAV)
 		  .build();
 
-		if (true) { 
+		if (debug) { 
 			return "texto demo ibm";
 		}
 		
