@@ -27,10 +27,11 @@ public class QuickstartSample {
 		File[] listOfFiles = folder.listFiles();
 
 	    for (int i = 0; i < listOfFiles.length; i++) {
-	      if (listOfFiles[i].isFile()) {
+	      if (listOfFiles[i].isFile() && !listOfFiles[i].isHidden() ) {
 	        System.out.println("File " + listOfFiles[i].getName());
 	        
-	        boolean debug = true;
+	        // Poner como falso para ejecutar la consulta con los servicios de google e ibm.
+	        boolean debug = false;
 	        
 			String GoogleTxt =  speechToTextGoogle.speechToTextFromFile("resources/" + listOfFiles[i].getName(), "es-MX" , debug)  ;
 			String IBMTxt = speechToTextIBM.speechToTextFromFile("resources/" + listOfFiles[i].getName(), "es-MX" , debug) ;
