@@ -6,6 +6,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.TargetDataLine;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,7 +25,7 @@ public class SpeechToTextIBM {
 		credentials = new CredentialsLoader();
 	}
 	
-	public String speechToTextFromFile(String fileName, String languaje) throws LineUnavailableException, FileNotFoundException {
+	public String speechToTextFromFile(String fileName, String languaje) throws LineUnavailableException, UnsupportedAudioFileException, IOException {
 
 		String language = "es-ES_NarrowbandModel";
 
@@ -32,6 +33,8 @@ public class SpeechToTextIBM {
 		service.setUsernameAndPassword(credentials.getSpeechToTextUser(), credentials.getSpeechToTextPassword());
 
 		File audio = new File(fileName);
+
+//		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audio);
 
 		RecognizeOptions options = new RecognizeOptions.Builder()
 		  .audio(audio).model(language)
@@ -41,7 +44,9 @@ public class SpeechToTextIBM {
 		if (true) { 
 			return "texto demo ibm";
 		}
+		
 		SpeechRecognitionResults transcript = service.recognize(options).execute();
+		
 		String message = transcript.getResults().get(0).getAlternatives().get(0).getTranscript();
 		
 		return message;

@@ -1,4 +1,13 @@
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import Google.SpeechToTextGoogle;
 import IBM.SpeechToTextIBM;
@@ -24,15 +33,39 @@ public class QuickstartSample {
 			System.out.println( speechToTextGoogle.speechToTextFromFile("resources/" + listOfFiles[i].getName(), "es-MX") );
 
 			System.out.println( speechToTextIBM.speechToTextFromFile("resources/" + listOfFiles[i].getName(), "es-MX") );
+			
+			String GoogleTxt = speechToTextGoogle.speechToTextFromFile("resources/" + listOfFiles[i].getName(), "es-MX") ;
+			String IBMTxt = speechToTextIBM.speechToTextFromFile("resources/" + listOfFiles[i].getName(), "es-MX");
+		
+			try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+		              new FileOutputStream("processedFiles/" + listOfFiles[i].getName() + ".google.txt"), "utf-8"))) {
+						writer.write(GoogleTxt);
+			}	        
+			
+			try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+		              new FileOutputStream("processedFiles/" + listOfFiles[i].getName() + ".ibm.txt"), "utf-8"))) {
+						writer.write(IBMTxt);
+			}
+			
+			File file = new File("resources/" + listOfFiles[i].getName());
 
-	        
+			Path sourcePath      = Paths.get("resources/" + listOfFiles[i].getName());
+			Path destinationPath = Paths.get("processedFiles/" + listOfFiles[i].getName());
+
+			try {
+			    Files.move(sourcePath, destinationPath,
+			            StandardCopyOption.REPLACE_EXISTING);
+			} catch (IOException e) {
+			    //moving file failed.
+			    e.printStackTrace();
+			}
+			
 	      } else if (listOfFiles[i].isDirectory()) {
 	        System.out.println("Directory " + listOfFiles[i].getName());
 	      }
 	    }
-		
-		//System.out.println( speechToTextGoogle.speechToTextFromFile("resources/hello_world.wav", "es-MX") );
-		
+		System.out.println("Fin Procesamiento.");
+
 	}
 	
 }
