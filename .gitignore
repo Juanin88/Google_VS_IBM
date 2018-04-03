@@ -3,3 +3,6 @@
 /config.properties
 /processedFiles/
 /resources/
+/log/
+/wav-cut/
+/wav-original/

@@ -23,10 +23,17 @@
 			<artifactId>google-cloud-speech</artifactId>
 			<version>0.32.0-alpha</version>
 		</dependency>
-<dependency>
-  <groupId>com.ibm.watson.developer_cloud</groupId>
-  <artifactId>speech-to-text</artifactId>
-  <version>5.1.1</version>
-</dependency>
+		<dependency>
+			<groupId>com.ibm.watson.developer_cloud</groupId>
+			<artifactId>speech-to-text</artifactId>
+			<version>5.1.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javazoom/jlayer -->
+		<dependency>
+			<groupId>javazoom</groupId>
+			<artifactId>jlayer</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+
 	</dependencies>
 </project>
